@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<style>
+    .row {
+
+        margin-top:50px;
+    }
+
+</style>
+<div class="row d-flex justify-content-center">
+    <div class="col-md-4">
+
+    <h3>Subject : {{message.message.subject}}</h3>
+    <hr>
+    <h4>Message id: {{message.message.body}}</h4>
+
+
+    <div class="form__group">
+        <p></p>
+    </div>
+        
+    <div class="for__group">
+        {%if not message.is_readed%}
+       <a href = '{%url "message-read" message.id%}'  class="btn btn-success" type="submit">Mark as readed</a>
+        {%else%}
+        <a href = '{%url "inbox"%}'  class="btn btn--main" type="submit" value="Confirm">Get back to inbox</a>
+
+       {%endif%}
+    </div>
+
+
+{%endblock%}

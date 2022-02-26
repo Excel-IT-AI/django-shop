@@ -1,0 +1,47 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<section class="vh-100" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-4">
+
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body text-center">
+            <div class="mt-5 mb-7">
+            
+            </div>
+            <h4 class="mb-2">{{user.name}}</h4>
+            
+            <div class="mb-4 pb-2">
+              <button type="button" class="btn btn-outline-primary btn-floating">
+                <i class="fab fa-facebook-f fa-lg"></i>
+              </button>
+              <button type="button" class="btn btn-outline-primary btn-floating">
+                <i class="fab fa-twitter fa-lg"></i>
+              </button>
+              <button type="button" class="btn btn-outline-primary btn-floating">
+                <i class="fab fa-skype fa-lg"></i>
+              </button>
+            </div>
+           
+            <div class="d-flex justify-content-center text-center mt-5 mb-2">
+              <div>
+                <p class="mb-2 h5">{{user.comment_set.all.count}}</p>
+                <p class="text-muted mb-0">Reviews</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center text-center mt-5 mb-2">
+              <div>
+              <p class="mb-2 h5">About</p>
+              <p class="text-muted mb-0">{{user.bio}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+    {%endblock%}

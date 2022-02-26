@@ -1,0 +1,58 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="row" style = 'margin-top:20px; margin-left:20px;'>
+    <div class="col-12">
+        <h2>Order summary </h2>
+     
+        <br>
+       <table class="table table-hover table-light">
+          <thead>
+             <tr>
+                <!-- Your Columns HERE -->
+                <th scope="col">#</th>
+                <th scope="col">Sender</th>
+                <th scope="col">Subject</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+             </tr>
+          </thead>
+     
+             <!-- Your rows inside the table HERE: -->
+             {%for message in notifications%}
+             <tr>
+               <th scope="row">{{forloop.counter}}</th>
+                <td>Staff</td>
+                <td>{{message.message.subject}}</td>
+                <!--ADD QUANTITY ICONS INC/DEC-->
+               
+               <td>
+                <a href='{%url "message-detail" message.id%}' class = 'btn btn-warning btn-rounded '>Check the message</a>
+                
+               </td>
+               <td>
+                  <a href='{%url "message-delete" message.id%}' class = 'btn btn-danger btn-rounded '>Delete message</a>
+                  
+                 </td>
+
+                {% endfor %}
+                {%if not notifications%}
+                <tr>
+                  <td colspan="5"><strong>Your inbox is empty</strong></td>
+               </tr>
+               {%endif%}
+               <tr>
+                <td colspan="5"><strong><a class="btn btn-primary float-right" href="{%url 'home'%}"  >Get back to home</strong></td>
+               </tr>
+               
+             </tr>
+        
+           
+             
+         
+          </tbody>
+       </table>
+    </div>
+
+{%endblock%}

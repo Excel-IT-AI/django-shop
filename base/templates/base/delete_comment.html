@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+
+
+{%block content%}
+<style>
+    .row{
+        margin-top: 50px;
+    }
+
+</style>
+
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-4">
+                <div class="layout__body">
+                    <form class="form" action="#" method = "POST">
+                        {%csrf_token%}
+                        <div class="form__group">
+                            <p>Are you sure you want to delete your comment ?</p>
+                        </div>
+
+                        <div class="for__group">
+                            <input class="btn btn-success" type="submit" value="Confirm" />
+                            <a href="{%url 'home'%}" class = "btn btn-black"> Back </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    {%endblock content%}

@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+
+
+{%block content%}
+<div class="container my-5">
+
+
+  <!--Section: Content-->
+  <section class="text-center dark-grey-text mb-5">
+
+    <div class="card">
+      <div class="card-body rounded-top border-top p-5">
+        
+        <!-- Section heading -->
+        <h3 class="font-weight-bold my-4">Create Ticket</h3>
+        <!-- Section description -->
+        <p class="font-weight-light mx-auto mb-4 pb-2">We are really sorry if you are dissatisfied <br> Please write a ticket that we can solve your problem</p>
+
+        <form class="mb-4 mx-md-5" method="post" action="">
+          {%csrf_token%}
+          <div class="row">
+            <div class="col-md-6 mb-4">
+
+              <!-- Name -->
+              
+
+            </div>
+            <div class="col-md-6 mb-4">
+
+              <!-- Email -->
+            
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-4">
+
+              <!-- Subject -->
+              {{form.subject}}
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="form-group mb-4">
+                {{form.body}}
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-info btn-md">Submit</button>
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+        
+      </div>
+    </div>
+
+  </section>
+  <!--Section: Content-->
+
+</div>
+{% endblock content%}

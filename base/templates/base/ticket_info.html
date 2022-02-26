@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+
+
+
+
+{%block content%}
+<style>
+    .row {
+
+        margin-top:50px;
+    }
+
+</style>
+<div class="row d-flex justify-content-center">
+    <div class="col-md-4">
+<h3>Ticket Subject: {{ticket.subject}}  </h3>
+<h4>Ticket id: {{ticket.id}}</h4>
+<hr>
+<p>Description: {{ticket.body}}</p>
+
+<hr>
+
+
+<h4>Created by: {{ticket.ticket_creator}}</h4>
+<h4>Created at : {{ticket.created }}</h4>
+<hr>
+<a class="btn btn-secondary " href="{%url 'ticket-panel' request.user.id%}">Get back to ticket panel</a>
+<br>
+</div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+
+
+{%block content%}
+<style>
+    .container {
+     margin-top: 50px;
+    }
+   </style>
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4">
+    <form method="POST" action=''>
+        {%csrf_token %} <!-- Token do ochrony(zawsze z POST)-->
+        {{form|crispy}}
+        <button type="submit" value="submit" class="btn btn-primary" value="Add comment">Add comment </button> 
+
+
+    </form>
+</div>
+</div>
+</div>
+   
+</div>
+
+{%endblock content%}

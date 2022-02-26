@@ -1,0 +1,159 @@
+{%extends 'base.html'%}
+{% load ratings %}
+
+{%block content%}
+
+
+<div class="container my-5 ">
+
+
+  <!--Section: Content-->
+  <section class="text-center">
+
+    <!-- Section heading -->
+    <h3 class="font-weight-bold mb-5">Product Details</h3>
+
+    <div class="row">
+
+      <div class="col-lg-6">
+
+       
+
+      
+              <img src="{{product.image.url}}"
+                alt="First slide" class="img-fluid">
+  
+
+      </div>
+
+      <div class="col-lg-5 text-center text-md-left">
+
+        <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+          <strong>{{product.title}}</strong>
+        </h2>
+        {%if product.discount_price%}
+        <span class="badge badge-danger product mb-4 ml-xl-0 ml-4">bestseller</span>
+        <span class="badge badge-warning product mb-4 ml-xl-0 ml-4">discount !</span>
+        {%else%}
+        <span class="badge badge-danger product mb-4 ml-xl-0 ml-4">bestseller</span>
+        {%endif%}
+        <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+          {%if product.discount_price%}
+          <span class="red-text font-weight-bold">
+            <strong>${{product.discount_price}}</strong>
+          </span>
+          <span class="grey-text">
+            <small>
+              <s>${{product.price}}</s>
+            </small>
+          </span>
+          {%else%}
+          <span class="red-text font-weight-bold">
+            <strong>${{product.price}}</strong>
+          </span>
+          {%endif%}
+        </h3>
+
+        <!--Accordion wrapper-->
+        <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+          <!-- Accordion card -->
+          <div class="card">
+
+            <!-- Card header -->
+            <div class="card-header" role="tab" id="headingOne1">
+              <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                aria-controls="collapseOne1">
+                <h5 class="mb-0">
+                  Description
+                  <i class="fas fa-angle-down rotate-icon"></i>
+                </h5>
+              </a>
+            </div>
+
+            <!-- Card body -->
+            <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+              data-parent="#accordionEx">
+              <div class="card-body">
+                {{product.description}}
+              </div>
+            </div>
+          </div>
+          <!-- Accordion card -->
+
+      
+          
+            </div>
+
+            
+        
+
+        <!-- Add to Cart -->
+       
+            <div class="row mt-3">
+              <div class="col-md-12 text-center text-md-left text-md-right">
+               <a href = '{{product.get_add_to_cart_url}}'  class="btn btn-primary btn-rounded">
+                  <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> Add to cart</a>
+              </div>
+              <br>
+              <hr>
+              <div class="col-md-12 text-center text-md-left text-md-right">
+                <a href = "{%url 'add-comment' product.slug%}" class="btn btn-info btn-rounded">
+                   <i class="fas fa-comment-dots mr-2" aria-hidden="true"></i> Add review of product</a>
+               </div>
+               </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.Add to Cart -->
+
+      </div>
+
+    </div>
+
+  
+  <!--Section: Content-->
+
+
+</div>
+<style>
+  .comments{
+    margin-left: 50px;
+
+  }
+</style>
+      <!--Section: Comment Content-->
+     <div class = 'comments'>
+        <!-- Section heading -->
+        <h3 class="font-weight-bold text-center mb-5">Product Reviews</h3>
+    {% for comment in comments %}
+    <div class="media mb-3">
+      <div class="media-body">
+        {%if request.user == comment.user%}
+        <a href="{%url 'profile' comment.user.id%}">
+          <h5 class="user-name font-weight-bold">{{comment.user.name}}
+            <a href="{%url 'delete-comment' comment.id %}"><i class="far fa-trash-alt"></i></a></h5>
+        </a>
+        {%else%}
+        <a href="{%url 'profile' comment.user.id%}">
+        <h5 class="user-name font-weight-bold">{{comment.user.name}}</h5>
+        </a>
+        {%endif%}
+        <div class="card-data">
+            <li class="comment-date font-small grey-text">
+              <i class="far fa-clock"></i> {{comment.created}}</li>
+          </ul>
+        </div>
+        <p class="dark-grey-text article">{{comment.body}}</p>
+      </div>
+    </div>
+ 
+    {%endfor%}
+  </div>
+</div>
+</section>
+<!--Section: Block Content-->
+
+
+</div>
+{%endblock%}

@@ -1,0 +1,96 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}        
+
+{%block content %}
+
+<div class="container mt-5">
+
+<h3>Checkout </h3>
+      <section class="dark-grey-text">
+  
+        <div class="card">
+        <div class="card-body">
+  
+
+          <div class="row">
+  
+            <div class="col-lg-6">
+
+
+              <div class="tab-content pt-6">
+  
+
+                <div class="tab-pane fade in show active" id="tabCheckoutBilling123" role="tabpanel">
+
+                  <form method = "POST" > 
+                    {%csrf_token%}
+             
+                  <h3>Shipping address</h3>
+                 
+  
+                </div>
+
+                    <label for="shipping_city" class="">City</label>
+                   <input type="text" class="form-control" placeholder="Warsaw 1234" id = 'shipping_city' name = 'shipping_city'>
+                    
+                  
+                   <label for="shipping_address" class="">Street and local</label>
+                    <input type="text" class="form-control" placeholder="Bałuty 32/12" id = 'shipping_address' name = 'shipping_address'>
+                    
+  
+
+                    <div class="row">
+  
+                      <div class="col-lg-4 col-md-12 mb-4">
+  
+                        <label for="country">Country</label>
+                       {{form.shipping_country}}
+                        <div class="invalid-feedback">
+                          Please select a valid country.
+                      </div>
+  
+                     </div>
+                      <!--Grid column-->
+  
+                      <!--Grid column-->
+                      <div class="col-lg-4 col-md-6 mb-4">
+  
+                        <label for="shipping_zip">Zip</label>
+                        <input type="text" class="form-control" placeholder="00-001" id = 'shipping_zip' name = 'shipping_zip'>
+                        <div class="invalid-feedback">
+                          Zip code required.
+                        </div> 
+                      </div>   
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" name="same_billing_address" id="same_billing_address">
+                      <label class="custom-control-label" for="same_billing_address">Billing address is the same as my shipping address</label>
+                    </div>
+                    
+                  </div>
+             
+                
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+              </div>
+            </form>
+              <div class="col-lg-6">
+             
+
+
+              
+             
+
+
+            {%include 'base/order-snippet.html'%}
+                
+                
+                </div>
+
+    </section>
+
+  
+  
+  </div>
+
+
+{%endblock%}

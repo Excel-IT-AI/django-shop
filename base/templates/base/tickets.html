@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="row" style = 'margin-top:20px; margin-left:20px;'>
+    <div class="col-12">
+        <h2>Tickets </h2>
+     
+        <br>
+       <table class="table table-hover table-light">
+          <thead>
+             <tr>
+                <!-- Your Columns HERE -->
+                <th scope="col">#</th>
+                <th scope="col">Ticket subject</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Date of creation</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+             </tr>
+          </thead>
+     
+             <!-- Your rows inside the table HERE: -->
+             {%for ticket in tickets%}
+             <tr>
+               <th scope="row">{{forloop.counter}}</th>
+                <td>{{ticket.subject}}</td>
+                <td>{{ticket.ticket_creator}}</td>
+                <td>{{ticket.created}}</td>
+                {%if ticket.is_open%}
+                <td>Open</td>
+                {%else%}
+                <td>Closed</td>
+                {%endif%}
+               <td>
+                <a href='{%url "ticket-detail" ticket.id%}' class = 'btn btn-warning btn-rounded '>Ticket Details</a>
+                
+               </td>
+            
+                {% endfor %}
+                {%if not tickets%}
+                <tr>
+                  <td colspan="5"><strong>Your inbox is empty</strong></td>
+               </tr>
+               {%endif%}
+               <tr>
+                <td colspan="5"><strong><a class="btn btn-primary float-right" href="{%url 'home'%}"  >Get back to home</strong></td>
+               </tr>
+               
+             </tr>
+        
+           
+             
+         
+          </tbody>
+       </table>
+    </div>
+
+{%endblock%}

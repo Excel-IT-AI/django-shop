@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{%block content%}
+   
+<main >
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4">
+
+                    <h3>Change mail</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {{ form.non_field_errors }}
+                      <div class="fieldWrapper">
+                        <div class="form-group mb-2">
+                          {{ field.errors }}
+                            {{ field|as_crispy_field }}
+                          {% if field.help_text %}
+                          <p class="help">{{ field.help_text|safe }}</p>
+                          {% endif %}
+                  {% endfor %}
+                    <button class="btn btn-success" type="submit">Change Email</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+  </div>
+</main>
+{%endblock%}

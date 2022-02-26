@@ -1,0 +1,119 @@
+
+{%extends 'base.html'%}
+{%block content%}
+
+<style>
+
+    .container {
+      margin-top: 20px;
+      margin-left : 300px;
+    }
+    .card-body{
+
+        margin-top: 10px;
+        text-align: center;
+        justify-content: center;
+    }
+</style>
+
+<div class = "container">
+<head>
+    <!-- Add meta tags for mobile and IE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title> PayPal Checkout  </title>
+</head>
+
+<body>
+
+            
+        <div class="container">
+           {%include 'base/order-snippet.html'%}
+
+
+    <div id="paypal-button-container"></div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AVKKy1CunwRAdgNHfWJvZkBcnR7acnO2Q1iSlYX3lKMbjfOojIC1q8bCGkR4859JmECOBjChLFfHFmBU&currency=USD&disable-funding=p24"></script>
+
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        var total = '{{order.get_total}}'
+        var order_id = '{{order.id}}'
+
+
+        function completeOrder(){
+            var url = "{%url 'payment-succes'%}"
+            
+            fetch(url, {
+                method: 'POST',
+                headers:{
+                    'Content-type':'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({'order_id':order_id})
+            })
+        }
+       
+        paypal.Buttons({
+
+
+          
+          style: {
+                size: 'small',
+                color:  'blue',
+                shape:  'rect',
+                label:  'pay',
+                height: 40,
+            },
+
+            
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total
+                        }
+                    }]
+                });
+            },
+
+           
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    completeOrder()
+                    window.location.href = "{% url 'home' %}"
+                
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+      </div>
+                
+    </div>
+         </div>
+        
+  </div>
+</body>
+
+</html>
+  {% endblock %}
+
+
+  
