@@ -1,4 +1,4 @@
-# Djanphone - ecommerce app
+# Django - ecommerce app
  Djanphone app created with Django and Bootstrap
 
 ## Table of content
